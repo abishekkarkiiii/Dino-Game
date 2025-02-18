@@ -58,7 +58,7 @@ class PlayGround extends Phaser.Scene {
     update() {
         if (this.assets.dino) {
             this.assets.dino.update();  // Call the player's update method to handle input
-        }
+        } //s
 
             this.assets.logic.destroyCactus();
             this.assets.logic.destroyBird(); 
@@ -68,9 +68,6 @@ class PlayGround extends Phaser.Scene {
                 }
             } 
             this.destroyCloud(); 
-
-           
-
             this.assets.logic.score();
         
     }
