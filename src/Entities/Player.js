@@ -11,18 +11,20 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     init() {
-        console.log(this)
         // Create a new KeyboardInput instance, passing the player instance
         this.keyboard = new KeyboardInput(this); // Pass 'this' to KeyboardInput
-        this.setBodySize(85, 85)
+        this.setBodySize(48, 85)
             .setGravityY(1500)
-            .setCollideWorldBounds(true);
-        // this.scene.x()
+            .setCollideWorldBounds(true)
+            .setOrigin(0.5)
+            .setBodySize(45, 80)
+            .setDepth(5)
+        // Initialize other settings if needed
     }
 
     update() {
         // Call the update method of KeyboardInput to handle key actions
-        this.keyboard.update();
+        this.keyboard.update(); 
     }
 }
 

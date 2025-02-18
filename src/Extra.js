@@ -6,7 +6,8 @@ class Extra {
     }
 
     startButton(scene){
-        scene.assets.startTrigger= scene.physics.add.sprite(0, 0, 'key').setAlpha(0).setSize(250,250); 
+        scene.assets.startTrigger= scene.physics.add.sprite(0, 0, 'key').setAlpha(0).setSize(170,150); 
+        // scene.physics.add.sprite(0,scene.assets.canvasHeight+35, 'key').setAlpha(0).setSize(2500,100); 
     }
 
 }
