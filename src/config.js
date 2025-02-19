@@ -16,7 +16,7 @@ const conf={
     default:'arcade',
    
     arcade:{
-      debug:true,
+      debug:false,
       gravity:{
         // y:170
       }

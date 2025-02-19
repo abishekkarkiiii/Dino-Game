@@ -5,7 +5,8 @@ class KeyboardInput extends Phaser.Physics.Arcade.Sprite {
         firststart: true,
         isCrouching: false,
         crouchCooldown: false,  // Cooldown for crouch
-        crouchTimeout: null,    // Timeout reference for cooldown
+        crouchTimeout: null,
+          // Timeout reference for cooldown
     }
 
     constructor(player) {
@@ -42,6 +43,8 @@ class KeyboardInput extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         if (this.keyboardAssets.checker && this.scene.land.width <= this.scene.game.config.width) {
+            this.scene.assets.startingTextFlag.destroy();
+            this.scene.assets.startingtext.text=""
             this.player.setVelocityX(200);
             this.scene.land.width += 50;
         }
@@ -125,7 +128,7 @@ class KeyboardInput extends Phaser.Physics.Arcade.Sprite {
             console.log("hello")
             // Reset cooldown
             if (this.keyboardAssets.crouchTimeout) {
-              
+
                 clearTimeout(this.keyboardAssets.crouchTimeout);
                 this.keyboardAssets.crouchTimeout = null;
             }

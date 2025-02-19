@@ -9,7 +9,9 @@ class Logic {
             bird:[],
             scoreNum:0,
             itreator:undefined,
+            highscore:localStorage.getItem('highscore'),
         };
+        this.highscoreSetter();
     }
 
     cactusSpawner() {
@@ -83,6 +85,7 @@ class Logic {
 
 
     gameOver() {
+          this.highscore();
         // Pause physics
         this.stopPlayer();
         this.reloadButton().setInteractive()
@@ -103,7 +106,7 @@ class Logic {
             'Game Over',
             { fontSize: '64px', fill: '#ff0000', fontFamily: 'Arial', fontStyle: 'bold' }
         ).setOrigin(0.5);
-
+       this.cloudPause();
         // Restart Scene After Delay
         // this.LogicAssets.scene.time.delayedCall(1500, () => {
         //     this.LogicAssets.scene.assets.isStart=false; 
@@ -159,6 +162,27 @@ class Logic {
 
     score(){
       this.LogicAssets.scene.assets.score.text=this.LogicAssets.scoreNum;
+    }
+
+
+    highscore(){
+        if(this.LogicAssets.highscore<this.LogicAssets.scoreNum){
+            localStorage.setItem('highscore',this.LogicAssets.scoreNum)
+        }
+        
+    }
+
+    highscoreSetter(){
+        if(localStorage.getItem('highscore')!=undefined||localStorage.getItem('highscore')!=null){       
+           this.LogicAssets.scene.assets.highscore.text=`HighScore:${localStorage.getItem('highscore')}`
+        }else{
+             this.LogicAssets.scene.assets.highscore.text=0;
+        }
+       
+    }
+
+    cloudPause(){
+        this.LogicAssets.scene.assets.cloudTimer.destroy();
     }
 
     

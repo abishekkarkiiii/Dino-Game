@@ -20,7 +20,11 @@ class PlayGround extends Phaser.Scene {
         isLandPaused:false,
         gameSpeed: 5.5,
         score:0,
-        cloudArr:[]
+        highscore:0,
+        cloudArr:[],
+        startingtext:undefined,
+        startingTextFlag:undefined,
+        cloudTimer:undefined
 
     };
     
@@ -49,10 +53,24 @@ class PlayGround extends Phaser.Scene {
         this.assets.canvasHeight = this.game.config.height;
         this.assets.canvasWidth = this.game.config.width;
         this.createEnviroment();
+        this.assets.startingTextFlag=this.time.addEvent({
+            delay: 500, // 500ms (0.5 seconds)
+            callback: () => {
+                this.assets.startingtext.visible = !this.assets.startingtext.visible; // Toggle visibility
+            },
+            loop: true // Keep running
+        });
+
+        this.assets.startingtext=this.add.text(this.assets.canvasWidth/2-170,this.assets.canvasHeight/2,`PRESS SPACE TO START`,{
+            fontSize:30,
+            fontFamily:"Arial",
+            color:"#808080"
+        })
+ 
         this.createPlayer();
         this.score();
         this.logic();
-        console.log(this)
+       
     }
 
     update() {
@@ -76,10 +94,10 @@ class PlayGround extends Phaser.Scene {
 
     createEnviroment() {
         this.land = this.add.tileSprite(0, this.game.config.height, 150, 25, "ground").setOrigin(0, 1);
-        this.time.addEvent({
+        this.assets.cloudTimer=this.time.addEvent({
             delay: 10000,
             callback: () => {
-                this.cloud=this.physics.add.image(Phaser.Math.Between(this.assets.canvasWidth+150,this.assets.canvasWidth-170),Phaser.Math.Between( 0,this.assets.canvasHeight/2-160),"cloud").setVelocityX(-50);
+                this.cloud=this.physics.add.image(Phaser.Math.Between(this.assets.canvasWidth+150,this.assets.canvasWidth-170),Phaser.Math.Between( 100,this.assets.canvasHeight/2-160),"cloud").setVelocityX(-50);
                 this.assets.cloudArr.push(this.cloud);
             },
             loop: true
@@ -100,6 +118,12 @@ class PlayGround extends Phaser.Scene {
 
     score(){
         this.assets.score=this.add.text(this.assets.canvasWidth-50,15,"0",{
+            fontSize:30,
+            fontFamily:"Arial",
+            color:"#808080"
+        })
+
+        this.assets.highscore=this.add.text(10,15,`High score:`,{
             fontSize:30,
             fontFamily:"Arial",
             color:"#808080"
